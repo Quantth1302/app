@@ -44,13 +44,13 @@ public class LoginController {
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
-                            "Email da ton tai tren he thong! vui long nhap lai...");
+                            "Email đã tồn tại trên hệ thống...");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "Tao moi nguoi dung thanh cong...!");
+            modelAndView.addObject("successMessage", "Tạo mới người dùng thành công...!");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("login");
 
