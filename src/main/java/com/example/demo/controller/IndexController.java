@@ -11,11 +11,11 @@ public class IndexController {
 
     @RequestMapping("/botreply")
     public @ResponseBody String botReply(@RequestBody String text) {
-        String greet = "helo";
+        String greet = "hello";
         String rep;
         if (text.equals(greet)){
-            rep = "hi";
-        }else rep = "I dont understand you";
+            rep = "hello cmm";
+        }else rep = "I dont understand you =))";
         return rep;
     }
 }

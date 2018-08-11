@@ -32,7 +32,7 @@
 </div>
     <div class="message_template">
         <li class="message">
-            <div class="avatar"></div>
+            <div class="avatar"><img src="http://img.k13cdn.net/f/2015/01/2-06.jpg" style="width: 60px; height: 60px; border-radius: 50%; display: inline-block;"></div>
             <div class="text_wrapper">
                 <div class="text"></div>
             </div>
@@ -85,14 +85,17 @@
                 ajaxBotReply(data);
             });
             $('.message_input').keyup(function (e) {
+                var data = getMessageText();
                 if (e.which === 13) {
-                    return sendMessage(getMessageText());
+                    sendMessage(getMessageText());
+                    ajaxBotReply(data);
                 }
             });
 
             ajaxBotReply = function (data) {
                 $.ajax({
                     url: "/index/botreply",
+                    contentType: "application/json; charset=utf-8",
                     data: data,
                     type: "post",
                     success: function (rep) {
