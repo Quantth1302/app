@@ -34,12 +34,12 @@
         <li class="message">
             <div class="avatar"></div>
             <div class="text_wrapper">
-                <div class="text"></div></div>
+                <div class="text"></div>
+            </div>
         </li>
     </div>
 </body>
 <script>
-    (function () {
         var Message;
         Message = function (arg) {
             this.text = arg.text, this.message_side = arg.message_side;
@@ -57,7 +57,7 @@
             return this;
         };
         $(function () {
-            var getMessageText, message_side, sendMessage;
+            var getMessageText, message_side, sendMessage, ajaxBotReply;
             message_side = 'left';
             getMessageText = function () {
                 var $message_input;
@@ -80,14 +80,26 @@
                 return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
             };
             $('.send_message').click(function (e) {
-                return sendMessage(getMessageText());
+                var data = getMessageText();
+                sendMessage(data);
+                ajaxBotReply(data);
             });
             $('.message_input').keyup(function (e) {
                 if (e.which === 13) {
                     return sendMessage(getMessageText());
                 }
             });
+
+            ajaxBotReply = function (data) {
+                $.ajax({
+                    url: "/index/botreply",
+                    data: data,
+                    type: "post",
+                    success: function (rep) {
+                       return sendMessage(rep);
+                    }
+                });
+            }
         });
-    }.call(this));
 </script>
 </html>
